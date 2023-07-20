@@ -1,0 +1,80 @@
+import React from 'react';
+import Image from 'next/image';
+// import MagnifyingGlassIcon from '@heroicons/react/outline/MagnifyingGlassIcon';
+// import ShoppingCartIcon from '@heroicons/react/outline/ShoppingCartIcon';
+// import Bars3Icon from '@heroicons/react/outline/Bars3Icon';
+import SearchIcon from '@heroicons/react/outline/SearchIcon';
+import ShoppingCartIcon from '@heroicons/react/outline/ShoppingCartIcon';
+import MenuIcon from '@heroicons/react/outline/MenuIcon'
+function Header() {
+  return (
+    <header>
+        {/*Top Nav*/}
+        <div className='flex items-center bg-amazon_blue p-1 flex-grow py-2'>
+            {/*The amazon logo. py-2 means the padding top is 0.5 rem*/}
+            <div className='mt-2 flex items-center sm:flex-grow-0'>
+                <Image src='https://links.papareact.com/f90'
+                width={150}
+                height = {40}
+                objectFit='contain'
+                className='cursor-pointer'/>
+                {/*The flex grow 0 will bring the search bar below to the left once we pass the small screen size.*/}
+            </div>
+
+            {/*Search bar*/}
+            <div className='hidden sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-yellow-400 hover:bg-yellow-500'>
+                {/*Flex grow means it takes up max space as it can  */}
+                
+                {/* The above className means the SearchBar should be hidden at a very small screen aize.
+                Only when it reaches small screen size, the display style becomes flex. */}
+                <input className='p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4' type='text'></input>
+                {/* The flex-shrink class will reduce the size of the search bar if we fit other components in. */}
+                <SearchIcon className='h-12 p-4'/>
+            </div>
+            {/* Right side of the nav bar */}
+            <div className='text-white flex items-center text-xs space-x-6 mx-6 whitespace-no-wrap'>
+                {/* 'space-x-6' allows the flex items to give a space between these flex items. Here, there is a horizontal space of 6px between each flex-item*/}
+                {/* text-xs is abuot the extreme small size of the text. mx-6 is about margin in x-axis of 6 px */}
+                {/* 'whitespace-nowrap' means the flex items will not wrap over one another on descreasing the size of the screen. */}
+                <div className='link'>
+                    <p>Hello Aditya Archunan Anand</p>
+                    <p className='font-extrabold md:text-sm' >Account and Lists</p>
+                </div>
+                <div className='link'>
+                    <p>Returns</p>
+                    <p className='font-extrabold md:text-sm'>& Orders</p>
+                </div>
+                <div className='relative link flex items-center'>
+                    <span className='absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full'>0</span>
+                    <ShoppingCartIcon className='h-10'/>
+                    {/* A general note. The numbers used here have the conversion system:
+                    1 = 0.25 rem */}
+                    <p className='hidden md:inline font-extrabold md:text-sm mt-2'>Basket</p>
+                {/* This means on a mobile view (which is the default view) the basket is hidden. When it reaches medium screen, it will reach inline display. */}
+                {/* The mt-2 means margin top of 0.5 rem. */}
+                </div>
+                
+            </div>
+        </div>
+
+        {/*Bottom Nav*/}
+        <div className='flex items-center space-x-3 p-2 pl-6 bg-amazon_blue-light text-white text-sm'>
+            <p className='link flex items-center'><MenuIcon className='h-6 mr-1'/>
+                All</p>
+            <p className='link'>Prime Video</p>
+            <p className='link'>Amazon Business</p>
+            <p className='link'>Today's Deals</p>
+            <p className='link hidden lg:inline-flex'>Electronics</p>
+            <p className='link hidden lg:inline-flex'>Food & Grocery</p>
+            <p className='link hidden lg:inline-flex'>Prime</p>
+            <p className='link hidden lg:inline-flex'>Buy Again</p>
+            <p className='link hidden lg:inline-flex'>Shopper Toolkit</p>
+            <p className='link hidden lg:inline-flex'>Health & Personal Care</p>
+            
+            
+        </div>
+    </header>
+  )
+}
+
+export default Header
