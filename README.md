@@ -1,2 +1,2 @@
 # Amazon-clone
-My Amazon Clone
+My Amazon Clone inspired from Sonny Sangha
