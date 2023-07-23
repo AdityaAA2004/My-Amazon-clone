@@ -5,9 +5,16 @@ import Image from 'next/image';
 // import Bars3Icon from '@heroicons/react/outline/Bars3Icon';
 import SearchIcon from '@heroicons/react/outline/SearchIcon';
 import ShoppingCartIcon from '@heroicons/react/outline/ShoppingCartIcon';
-import MenuIcon from '@heroicons/react/outline/MenuIcon'
+import MenuIcon from '@heroicons/react/outline/MenuIcon';
+import {signIn, signOut, useSession} from "next-auth/react";
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import { selectItems } from '../slices/basketSlice';
 function Header() {
-  return (
+    const items = useSelector(selectItems);
+    const { data: session, status } = useSession();
+    const router = useRouter();
+    return (
     <header>
         {/*Top Nav*/}
         <div className='flex items-center bg-amazon_blue p-1 flex-grow py-2'>
@@ -17,7 +24,7 @@ function Header() {
                 width={150}
                 height = {40}
                 objectFit='contain'
-                className='cursor-pointer'/>
+                className='cursor-pointer' onClick={() => router.push('/')}/>
                 {/*The flex grow 0 will bring the search bar below to the left once we pass the small screen size.*/}
             </div>
 
@@ -36,16 +43,16 @@ function Header() {
                 {/* 'space-x-6' allows the flex items to give a space between these flex items. Here, there is a horizontal space of 6px between each flex-item*/}
                 {/* text-xs is abuot the extreme small size of the text. mx-6 is about margin in x-axis of 6 px */}
                 {/* 'whitespace-nowrap' means the flex items will not wrap over one another on descreasing the size of the screen. */}
-                <div className='link'>
-                    <p>Hello Aditya Archunan Anand</p>
+                <div onClick={!session ? signIn: signOut} className='link'>
+                    <p>{session ? `Hello ${session.user.name}`: "Sign In"}</p>
                     <p className='font-extrabold md:text-sm' >Account and Lists</p>
                 </div>
                 <div className='link'>
                     <p>Returns</p>
                     <p className='font-extrabold md:text-sm'>& Orders</p>
                 </div>
-                <div className='relative link flex items-center'>
-                    <span className='absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full'>0</span>
+                <div className='relative link flex items-center' onClick={() => router.push('/checkout')}>
+                    <span className='absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-500 text-center rounded-full'>{items.length}</span>
                     <ShoppingCartIcon className='h-10'/>
                     {/* A general note. The numbers used here have the conversion system:
                     1 = 0.25 rem */}
