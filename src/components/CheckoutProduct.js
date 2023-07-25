@@ -2,19 +2,25 @@ import React from 'react';
 import Image from 'next/image';
 import StarIcon from '@heroicons/react/solid/StarIcon';
 import Currency from 'react-currency-formatter-v2';
-import { useDispatch } from 'react-redux';
-import { addToBasket, removeFromBasket } from '../slices/basketSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToBasket, reduceQuantity, removeFromBasket, selectItems } from '../slices/basketSlice';
 
 function CheckoutProduct({ id, title, price, description, category, image, hasPrime, rating }) {
-    const dispatch = useDispatch()
-    const addItemToBasket = () => {
-        const product= {id, title, price, description, category, image, hasPrime, rating}
-        dispatch(addToBasket(product));
-    }
+    const dispatch = useDispatch();
+    const items = useSelector(selectItems);
+    const quantity = items.filter((item,ind)=> item.id === id).length;
+    const priceForProduct = price * quantity;
+    function addItemToBasket() {
+    const product = { id, title, price, description, category, image, hasPrime, rating };
+    dispatch(addToBasket(product));
+  }
     const removeItemFromBasket = () => {
         dispatch(removeFromBasket({id}));
     }
 
+    const decreaseQuantity = () =>{
+      dispatch(reduceQuantity({id}));
+    }
     return (
     <div className="grid grid-cols-5">
       <Image src={image} height={200} width={200} objectFit="contain" />
@@ -29,7 +35,14 @@ function CheckoutProduct({ id, title, price, description, category, image, hasPr
         <p className="text-xs mt-2 line-clamp-3">{description}</p>
         {/* Note line-clamp-3 means only the first 3 lines of the description will be used. */}
         <div className="flex flex-col">
-          <Currency quantity={price} currency="INR" />
+          <div className='flex space-x-2'>
+            <Currency quantity={price} className='space-x-2' />
+            <p className='space-x-2'>x</p>
+            
+            <p>{quantity}</p>
+            <p>=</p>
+            <Currency quantity={priceForProduct} />
+          </div>
           {hasPrime && (
             <div className="flex items-center mt-2">
               <img
@@ -46,7 +59,9 @@ function CheckoutProduct({ id, title, price, description, category, image, hasPr
         
        {/* Right side add and remove buttons */}
        <div className='flex flex-col space-y-2 mt-auto justify-self-end'>
-        <button className='button' onClick={addItemToBasket}>Add to Basket</button>
+        <div className='flex items-center space-x-3'>
+          <button className='button' onClick={decreaseQuantity} >-</button> <span>Quantity: {items.filter((item,ind)=> item.id === id).length}</span> <button className='button' onClick={addItemToBasket}>+</button>
+        </div>
         <button className='button' onClick={removeItemFromBasket}>Remove from Basket</button>
        </div>
     </div>
