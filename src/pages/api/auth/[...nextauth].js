@@ -42,7 +42,7 @@ const options = {
             return userData; // Return the user data if sign-in is successful
           } else {
             // User doesn't exist, create a new user
-            const { user } = await createUserWithEmailAndPassword(auth, username + "@example.com", password);
+            const { user } = await createUserWithEmailAndPassword(auth, username, password);
 
             // Store user data in Firestore
             await setDoc(userDocRef, {
