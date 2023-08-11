@@ -1,11 +1,11 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials"
-import { FirestoreAdapter } from "@auth/firebase-adapter";
-import { app, db } from "../../../../firebase";
-import * as firestoreFunctions from 'firebase/firestore'
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+// import CredentialsProvider from "next-auth/providers/credentials"
+// import { FirestoreAdapter } from "@auth/firebase-adapter";
+// import { app, db } from "../../../../firebase";
+// import * as firestoreFunctions from 'firebase/firestore'
+// import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 const options = {
   
