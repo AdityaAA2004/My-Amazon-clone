@@ -1,22 +1,21 @@
-import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import NextAuth from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
 import { useDispatch } from "react-redux";
-// import CredentialsProvider from "next-auth/providers/credentials"
-// import { FirestoreAdapter } from "@auth/firebase-adapter";
-// import { app, db } from "../../../../firebase";
-// import * as firestoreFunctions from 'firebase/firestore'
-// import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { setUser, clearUser } from "../../../slices/sessionSlice";
 
 const options = {
-  
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
-    
+    // Other providers...
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+};
+
+const nextAuthConfig = {
+  ...options,
   callbacks: {
     async signIn(user, account, profile) {
       // Handle sign-in logic here...
@@ -31,8 +30,6 @@ const options = {
       return true;
     },
   },
-
-  secret: process.env.NEXTAUTH_SECRET,
 };
 
-export default NextAuth(options);
+export default NextAuth(nextAuthConfig);
