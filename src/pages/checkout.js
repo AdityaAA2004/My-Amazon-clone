@@ -54,7 +54,7 @@ function checkout() {
                     </span>
                     </h2>
                     <button className={buttonStyling}>
-                      {!session ? "Sign In to Checkout" : "Proceed to Checkout"}
+                      {!session.isLoggedIn ? "Sign In to Checkout" : "Proceed to Checkout"}
                     </button>
                 </>
               )}
