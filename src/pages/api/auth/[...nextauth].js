@@ -15,4 +15,4 @@ const options = {
 };
 
 
-export default NextAuth(nextAuthConfig);
+export default NextAuth(options);

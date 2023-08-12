@@ -9,8 +9,8 @@ import {selectUser} from '../slices/sessionSlice';
 
 function checkout() {
   const items = useSelector(selectItems);
-  const session = useSelector(selectUser);
-  console.log(session)
+  const session = useSession()
+  
   const newBasket = Array.from(new Set(items.map(item => item.id))).map(id => items.find(item => item.id === id));
    console.log(newBasket)
   const buttonStyling = `button mt-4 ${!session && 'from-gray-300 to-gray-500 text-gray-200 border-gray-200 cursor-not-allowed'}`
@@ -56,7 +56,7 @@ function checkout() {
                     </span>
                     </h2>
                     <button className={buttonStyling}>
-                      {!session.isLoggedIn ? "Sign In to Checkout" : "Proceed to Checkout"}
+                      {!session ? "Sign In to Checkout" : "Proceed to Checkout"}
                     </button>
                 </>
               )}
