@@ -44,7 +44,7 @@ function Header() {
                 {/* 'space-x-6' allows the flex items to give a space between these flex items. Here, there is a horizontal space of 6px between each flex-item*/}
                 {/* text-xs is abuot the extreme small size of the text. mx-6 is about margin in x-axis of 6 px */}
                 {/* 'whitespace-nowrap' means the flex items will not wrap over one another on descreasing the size of the screen. */}
-                <div onClick={!session ? signIn: signOut} className='link'>
+                <div onClick={!session.data ? signIn: signOut} className='link'>
                     <p>{session.data ? `Hello ${session.data.user.name}`: "Sign In"}</p>
                     <p className='font-extrabold md:text-sm' >Account and Lists</p>
                 </div>
