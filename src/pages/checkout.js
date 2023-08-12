@@ -5,6 +5,7 @@ import { selectItems } from "../slices/basketSlice";
 import CheckoutProduct from "../components/CheckoutProduct";
 import Currency from 'react-currency-formatter-v2';
 import { useSession } from "next-auth/react";
+import {selectUser} from '../slices/sessionSlice';
 
 function checkout() {
   const items = useSelector(selectItems);
