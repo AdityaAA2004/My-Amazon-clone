@@ -1,13 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import basketReducer from '../slices/basketSlice'
 import storage from 'redux-persist/lib/storage';
-import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 
 const persistConfig = {
   key: 'root',
-  sessionStorage,
+  storage,
 }
 
 const persistedReducer = persistReducer(persistConfig, basketReducer)
