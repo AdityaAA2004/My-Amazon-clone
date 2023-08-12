@@ -10,9 +10,10 @@ import {signIn, signOut, useSession} from "next-auth/react";
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
+import {selectUser} from '../slices/sessionSlice';
 function Header() {
     const items = useSelector(selectItems);
-    const { data: session, status } = useSession();
+    const session = useSelector(selectUser);
     const router = useRouter();
     return (
     <header>
@@ -44,7 +45,7 @@ function Header() {
                 {/* text-xs is abuot the extreme small size of the text. mx-6 is about margin in x-axis of 6 px */}
                 {/* 'whitespace-nowrap' means the flex items will not wrap over one another on descreasing the size of the screen. */}
                 <div onClick={!session ? signIn: signOut} className='link'>
-                    <p>{session ? `Hello ${session.user.name}`: "Sign In"}</p>
+                    <p>{session ? `Hello ${session.name}`: "Sign In"}</p>
                     <p className='font-extrabold md:text-sm' >Account and Lists</p>
                 </div>
                 <div className='link'>
