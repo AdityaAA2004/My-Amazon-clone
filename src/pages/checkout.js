@@ -5,7 +5,6 @@ import { selectItems } from "../slices/basketSlice";
 import CheckoutProduct from "../components/CheckoutProduct";
 import Currency from 'react-currency-formatter-v2';
 import { useSession } from "next-auth/react";
-import {selectUser} from '../slices/sessionSlice';
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 const stripePromise = loadStripe(process.env.stripe_public_key)
@@ -20,9 +19,17 @@ function checkout() {
     console.log("Checkout session created");
     //Call the backend to create a checkout session
     const stripe = await stripePromise;
+    const basketforCheckout= []
+    items.map(item=>{
+      idToPush = item.id
+      var itemToPush = items.find((idToPush)=> item.id == idToPush)
+      if (!basketforCheckout.includes(itemToPush)){
+        basketforCheckout.push(itemToPush)
+      }
+    })
     const checkoutSession = await axios.post('api/create-checkout-session.js',
     {
-      items: items,
+      items: basketforCheckout,
       email: session?.data?.user?.email
     })
   }
