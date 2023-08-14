@@ -15,13 +15,12 @@ function checkout() {
   const session = useSession()
   
   const newBasket = Array.from(new Set(items.map(item => item.id))).map(id => items.find(item => item.id === id));
-  console.log(newBasket)
   const buttonStyling = `button mt-4 ${!session.data && 'from-gray-300 to-gray-500 text-gray-200 border-gray-200 cursor-not-allowed'}`
   const createCheckoutSession = async () =>{
     console.log("Checkout session created");
     //Call the backend to create a checkout session
     const stripe = await stripePromise;
-    const checkoutSession = axios.post('api/create-checkout-session.js',
+    const checkoutSession = await axios.post('api/create-checkout-session.js',
     {
       items: items,
       email: session?.data?.user?.email
