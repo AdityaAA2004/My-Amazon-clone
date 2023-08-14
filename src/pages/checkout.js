@@ -6,6 +6,7 @@ import CheckoutProduct from "../components/CheckoutProduct";
 import Currency from 'react-currency-formatter-v2';
 import { useSession } from "next-auth/react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 const stripePromise = loadStripe(process.env.stripe_public_key)
@@ -13,12 +14,20 @@ const stripePromise = loadStripe(process.env.stripe_public_key)
 import {selectUser} from '../slices/sessionSlice';
 
 >>>>>>> da20e21ccd854c376a40cad65c996cd3db25633d
+=======
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+const stripePromise = loadStripe(process.env.stripe_public_key)
+>>>>>>> c6c4a4ba2b7de9255ed40bd0204f8b9389979fa0
 function checkout() {
   const items = useSelector(selectItems);
   const session = useSession()
   
   const newBasket = Array.from(new Set(items.map(item => item.id))).map(id => items.find(item => item.id === id));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c6c4a4ba2b7de9255ed40bd0204f8b9389979fa0
   console.log(newBasket)
   const buttonStyling = `button mt-4 ${!session.data && 'from-gray-300 to-gray-500 text-gray-200 border-gray-200 cursor-not-allowed'}`
   const createCheckoutSession = async () =>{
@@ -31,10 +40,13 @@ function checkout() {
       email: session?.data?.user?.email
     })
   }
+<<<<<<< HEAD
 =======
    console.log(newBasket)
   const buttonStyling = `button mt-4 ${!session && 'from-gray-300 to-gray-500 text-gray-200 border-gray-200 cursor-not-allowed'}`
 >>>>>>> da20e21ccd854c376a40cad65c996cd3db25633d
+=======
+>>>>>>> c6c4a4ba2b7de9255ed40bd0204f8b9389979fa0
   return (
     <div className="bg-gray-100">
         <Header/>
@@ -77,12 +89,17 @@ function checkout() {
                     </span>
                     </h2>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <button className={buttonStyling} role="link" onClick={createCheckoutSession}>
                       {!session ? "Sign In to Checkout" : "Proceed to Checkout"}
 =======
                     <button className={buttonStyling}>
                       {!session.data ? "Sign In to Checkout" : "Proceed to Checkout"}
 >>>>>>> da20e21ccd854c376a40cad65c996cd3db25633d
+=======
+                    <button className={buttonStyling} role="link" onClick={createCheckoutSession}>
+                      {!session ? "Sign In to Checkout" : "Proceed to Checkout"}
+>>>>>>> c6c4a4ba2b7de9255ed40bd0204f8b9389979fa0
                     </button>
                 </>
               )}
