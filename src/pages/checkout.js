@@ -19,9 +19,7 @@ function checkout() {
     console.log("Checkout session created");
     //Call the backend to create a checkout session
     const stripe = await stripePromise;
-
-    console.log(stripe)
-    const checkoutSession = await axios.post('api/create-checkout-session',
+    const checkoutSession = await axios.post('./api/create-checkout-session',
     {
       items: newBasket,
       email: session?.data?.user?.email
