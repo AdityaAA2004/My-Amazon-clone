@@ -5,13 +5,25 @@ import { selectItems } from "../slices/basketSlice";
 import CheckoutProduct from "../components/CheckoutProduct";
 import Currency from 'react-currency-formatter-v2';
 import { useSession } from "next-auth/react";
-
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+const stripePromise = loadStripe(process.env.stripe_public_key)
 function checkout() {
   const items = useSelector(selectItems);
   const session = useSession();
   const newBasket = Array.from(new Set(items.map(item => item.id))).map(id => items.find(item => item.id === id));
-   console.log(newBasket)
+  console.log(newBasket)
   const buttonStyling = `button mt-4 ${!session.data && 'from-gray-300 to-gray-500 text-gray-200 border-gray-200 cursor-not-allowed'}`
+  const createCheckoutSession = async () =>{
+    console.log("Checkout session created");
+    //Call the backend to create a checkout session
+    const stripe = await stripePromise;
+    const checkoutSession = axios.post('api/create-checkout-session.js',
+    {
+      items: items,
+      email: session?.data?.user?.email
+    })
+  }
   return (
     <div className="bg-gray-100">
         <Header/>
@@ -53,7 +65,7 @@ function checkout() {
                      starts from 0. Then, the total keeps adding up by the item's price. */}
                     </span>
                     </h2>
-                    <button className={buttonStyling}>
+                    <button className={buttonStyling} role="link" onClick={createCheckoutSession}>
                       {!session ? "Sign In to Checkout" : "Proceed to Checkout"}
                     </button>
                 </>
