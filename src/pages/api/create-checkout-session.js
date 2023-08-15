@@ -137,7 +137,7 @@ export default async (req,res) => {
                 "PK"
             ],
         },
-        product:transformedItems ,
+        product_data:transformedItems ,
         shipping_rates: ['shr_1NfHAmBBbZf8NdxvPZrXSpfN'],
         mode:"payment",
         success_url:`${process.env.HOST}/success`,
