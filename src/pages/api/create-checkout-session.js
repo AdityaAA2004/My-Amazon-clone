@@ -146,7 +146,7 @@ export default async (req,res) => {
                 shipping_rate_data: {
                   type: 'fixed_amount',
                   fixed_amount: {
-                    amount: 3000,
+                    amount: 300,
                     currency: 'usd',
                   },
                   display_name: 'Next day air',
