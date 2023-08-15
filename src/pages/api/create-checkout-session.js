@@ -141,7 +141,27 @@ export default async (req,res) => {
             ],
         },
         line_items:transformedItems ,
-        shipping_options: ['shr_1NfHAmBBbZf8NdxvPZrXSpfN'],
+        shipping_options: [
+            {
+                "display_name": "Next-Day-Delivery",
+                "type": "fixed_amount",
+                "fixed_amount": {
+                  "amount": "499",
+                  "currency": "usd"
+                },
+                "tax_behavior": "exclusive",
+                "delivery_estimate": {
+                  "minimum": {
+                    "value": "1",
+                    "unit": "business_day"
+                  },
+                  "maximum": {
+                    "value": "1",
+                    "unit": "business_day"
+                  }
+                }
+              }
+        ],
         mode:"payment",
         success_url:`${process.env.HOST}/success`,
         cancel_url:`${process.env.HOST}`,
