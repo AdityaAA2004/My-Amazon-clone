@@ -143,24 +143,25 @@ export default async (req,res) => {
         line_items:transformedItems ,
         shipping_options: [
             {
-                "display_name": "Next-Day-Delivery",
-                "type": "fixed_amount",
-                "fixed_amount": {
-                  "amount": "499",
-                  "currency": "usd"
-                },
-                "tax_behavior": "exclusive",
-                "delivery_estimate": {
-                  "minimum": {
-                    "value": "1",
-                    "unit": "business_day"
+                shipping_rate_data: {
+                  type: 'fixed_amount',
+                  fixed_amount: {
+                    amount: 3000,
+                    currency: 'usd',
                   },
-                  "maximum": {
-                    "value": "1",
-                    "unit": "business_day"
-                  }
-                }
-              }
+                  display_name: 'Next day air',
+                  delivery_estimate: {
+                    minimum: {
+                      unit: 'business_day',
+                      value: 1,
+                    },
+                    maximum: {
+                      unit: 'business_day',
+                      value: 1,
+                    },
+                  },
+                },
+              },
         ],
         mode:"payment",
         success_url:`${process.env.HOST}/success`,
