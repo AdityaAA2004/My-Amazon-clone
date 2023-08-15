@@ -36,6 +36,7 @@ function checkout() {
       alert(result.error)
     }
   }
+  
   return (
     <div className="bg-gray-100">
         <Header/>
