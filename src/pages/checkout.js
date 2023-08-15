@@ -23,6 +23,7 @@ function checkout() {
     newBasket.forEach(itemofNewBasket =>{
       quantityForItems.push({ [itemofNewBasket.id]: items.filter(item => item.id === itemofNewBasket.id).length });
     })
+    //Exact call is here in the two variable assignments below
     const checkoutSession = await axios.post('/api/create-checkout-session',
     {
       items: newBasket,
@@ -30,6 +31,10 @@ function checkout() {
       quantityList: quantityForItems
 
     })
+    const result = await stripe.redirectToCheckout({ sessionId : checkoutSession.data.id})
+    if (result.error){
+      alert(result.error)
+    }
   }
   return (
     <div className="bg-gray-100">
