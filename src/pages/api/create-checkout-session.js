@@ -13,6 +13,7 @@ export default async (req,res) => {
             }
         }
     }));
+    console.log(transformedItems)
 
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
