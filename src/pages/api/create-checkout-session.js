@@ -141,7 +141,7 @@ export default async (req,res) => {
             ],
         },
         line_items:transformedItems ,
-        shipping_rates: ['shr_1NfHAmBBbZf8NdxvPZrXSpfN'],
+        shipping_options: ['shr_1NfHAmBBbZf8NdxvPZrXSpfN'],
         mode:"payment",
         success_url:`${process.env.HOST}/success`,
         cancel_url:`${process.env.HOST}`,
