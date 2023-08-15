@@ -14,7 +14,7 @@ export default async (req,res) => {
         }
     }));
 
-    const session = await stripe.checkout.session.create({
+    const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         shipping_address_collection:{
             allowed_countries: ["US",
@@ -149,5 +149,5 @@ export default async (req,res) => {
         
     });
 
-    res.status(200).json({id:session.id})
+    res.status(200).json({id:session.id}) // this is the response part which is returned due to stripe API call from our endpoint created here. 
 }
