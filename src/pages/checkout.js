@@ -19,9 +19,9 @@ function checkout() {
     console.log("Checkout session created");
     //Call the backend to create a checkout session
     const stripe = await stripePromise;
-    const quantityForItems= []
+    const quantityForItems= new Map()
     newBasket.forEach(itemofNewBasket =>{
-      quantityForItems.push({ [itemofNewBasket.id]: items.filter(item => item.id === itemofNewBasket.id).length });
+      quantityForItems[itemofNewBasket.id] = items.filter(item => item.id === itemofNewBasket.id).length ;
     })
     //Exact call is here in the two variable assignments below
     const checkoutSession = await axios.post('/api/create-checkout-session',

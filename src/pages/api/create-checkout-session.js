@@ -4,7 +4,7 @@ export default async (req,res) => {
     console.log(quantityList)
     const transformedItems = items.map(item=>({
         description: item.description,
-        quantity : quantityList[0][id],
+        quantity : quantityList[id],
         price_data:{
             currency:'usd',
             unit_amount:(item.price*100).toFixed(), // amount in cents, again!
