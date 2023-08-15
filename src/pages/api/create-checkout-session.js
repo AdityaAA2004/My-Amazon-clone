@@ -3,13 +3,14 @@ export default async (req,res) => {
     const {items,email,quantityList} = req.body
     console.log(quantityList)
     const transformedItems = items.map(item=>({
-        description: item.description,
         quantity : quantityList[item.id],
         price_data:{
             currency:'usd',
             unit_amount:(item.price*100).toFixed(), // amount in cents, again!
             product_data:{
                 name: item.title,
+                description: item.description,
+
                 images:[item.image]
             }
         }
