@@ -3,7 +3,7 @@ export default async (req,res) => {
     const {items,email,quantityList} = req.body
     const transformedItems = items.map(item=>({
         description: item.description,
-        quantity : quantityList.find(it=>it.id === item.id),
+        quantity : quantityList[0].id,
         price_data:{
             currency:'usd',
             unit_amount:(item.price*100).toFixed(), // amount in cents, again!
