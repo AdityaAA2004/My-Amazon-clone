@@ -16,7 +16,7 @@ function Header() {
     const session = useSession()
     const router = useRouter();
     return (
-    <header>
+    <header class={'sticky'}>
         {/*Top Nav*/}
         <div className='flex items-center bg-amazon_blue p-1 flex-grow py-2'>
             {/*The amazon logo. py-2 means the padding top is 0.5 rem*/}
