@@ -12,9 +12,11 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const endPointSecret = process.env.STRIPE_SIGNING_SECRET;
 
 const fulfillOrder = async (session) => {
-    console.log('Fulfilling order: ', session)
+    console.log('Fulfilling order: ', session.id)
+    const userDocPath = `users/${session.metadata.userEmail}/orders/${session.id}`; // Construct the path
+    console.log('User Document Path: ', userDocPath);
     return app.firestore().collection('users').
-    doc(session.metadata.email).
+    doc(session.metadata.userEmail).
     collection('orders').
     doc(session.id).
     set({
@@ -32,23 +34,28 @@ const fulfillOrder = async (session) => {
 
 export default async (req, res) => {
     if (req.method === 'POST') {
+        //We need to gnereate the certificate using a buffer of information
         const requestBuffer = await buffer(req);
         const payload = requestBuffer.toString();
         const signature = req.headers['stripe-signature']; // Use square brackets
         let event;
-
+        //Verify that the event posted came from stripe
         try {
             event = stripe.webhooks.constructEvent(payload, signature, endPointSecret);
+
         } catch (err) {
             console.error('Error:', err.message);
             return res.status(400).send(`Webhook error: ${err.message}`);
         }
-
+        //Handle checkout session completed event
         if (event.type === 'checkout.session.completed') {
+            console.log('Checkout session completed event received');
             const session = event.data.object;
-
+            console.log(session)
+            //fulfill the order
             try {
                 await fulfillOrder(session);
+                console.log("Order fulfilled.")
                 return res.status(200).send('Webhook Received');
             } catch (err) {
                 console.error('Fulfillment Error:', err.message);
@@ -64,3 +71,7 @@ export const config = {
         externalResolver: true,
     }
 }
+//Here, we want the request to be like a stream than a parsed object.
+
+//Body-parser parses an HTTP request body that usually helps when you need to know more than just the URL being hit.
+// Using body-parser allows you to access req.body from within routes and use that data.

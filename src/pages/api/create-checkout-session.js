@@ -1,7 +1,6 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 export default async (req,res) => {
     const {items,email,quantityList} = req.body
-    console.log(quantityList)
     const transformedItems = items.map(item=>({
         quantity : quantityList[item.id],
         price_data:{
@@ -15,7 +14,6 @@ export default async (req,res) => {
             }
         }
     }));
-    console.log(transformedItems)
 
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
