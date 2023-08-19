@@ -2,7 +2,6 @@ import { buffer } from "micro"
 import * as admin from "firebase-admin"
 
 // Secure a connection to Firebase from the backend
-console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS)
 const serviceAccount = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS)
 const app = !admin.apps.length ? admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -35,6 +34,8 @@ const fulfillOrder = async (session) => {
 }
 
 export default async (req, res) => {
+  console.log(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS))
+
   if (req.method === 'POST') {
     //We need to gnereate the certificate using a buffer of information
     const requestBuffer = await buffer(req);
