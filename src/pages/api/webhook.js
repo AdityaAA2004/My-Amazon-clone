@@ -34,7 +34,6 @@ const fulfillOrder = async (session) => {
 }
 
 export default async (req, res) => {
-  console.log(JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS))
 
   if (req.method === 'POST') {
     //We need to gnereate the certificate using a buffer of information
