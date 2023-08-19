@@ -1,6 +1,8 @@
 // Your web app's Firebase configuration
+import firebase from "firebase/app";
 import { getFirestore } from 'firebase-admin/firestore';
-import { getApps,getApp,initializeApp } from 'firebase-admin/app';
+import {getApp} from "firebase-admin/app";
+import {initializeApp} from "firebase-admin/app";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBdlTa1qWiHN4P5192Ls1oJ5TzYOmT2GtQ",
@@ -11,7 +13,16 @@ const firebaseConfig = {
   appId: "1:509246237994:web:5128b8a7fcb347355ac253"
 };
 
-const app = initializeApp(firebaseConfig,'amazon-clone-2')
+function InitializeAppIfNecessary() {
+  try {
+    return getApp()
+  } catch (e) {
+    return initializeApp(firebaseConfig)
+  }
+
+}
+
+const app = InitializeAppIfNecessary()
 const db = getFirestore(app)
 
 export {app,db}

@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49098186-85d2-4c11-af09-2fccf58f992a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Order.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/orders.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/firebase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/api/create-checkout-session.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/api/create-checkout-session.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/api/webhook.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/api/webhook.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/success.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/success.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/basketSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/basketSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/sessionSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/sessionSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +63,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Aditya\My-Amazon-clone\" />
       <recent name="D:\Aditya\My-Amazon-clone\ssl" />
     </key>
   </component>
@@ -70,7 +84,10 @@
       <workItem from="1692015204813" duration="686000" />
       <workItem from="1692261078180" duration="855000" />
       <workItem from="1692276810902" duration="4016000" />
-      <workItem from="1692338558217" duration="2620000" />
+      <workItem from="1692338558217" duration="4756000" />
+      <workItem from="1692359775684" duration="8294000" />
+      <workItem from="1692371445319" duration="2458000" />
+      <workItem from="1692427178858" duration="7371000" />
     </task>
     <servers />
   </component>
