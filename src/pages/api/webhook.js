@@ -2,7 +2,7 @@ import { buffer } from "micro"
 import * as admin from "firebase-admin"
 
 // Secure a connection to Firebase from the backend
-const serviceAccount = require('../../../service-account-key.json')
+const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT)
 const app = !admin.apps.length ? admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 }) : admin.app();
