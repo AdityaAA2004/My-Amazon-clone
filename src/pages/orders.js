@@ -4,13 +4,9 @@ import {db} from "../../firebase";
 import moment from "moment";
 import Order from "../components/Order";
 import {list} from "postcss";
-import {useDispatch} from "react-redux";
-import {resetBasket} from "../slices/basketSlice";
 
 export default function orders({listOfOrders}){
-    const session = useSession()
-    const dispatch = useDispatch()
-    dispatch(resetBasket())
+
     return (
         <div className={'h-screen'}>
             <header>
