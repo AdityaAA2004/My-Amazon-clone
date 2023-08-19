@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
 // import MagnifyingGlassIcon from '@heroicons/react/outline/MagnifyingGlassIcon';
 // import ShoppingCartIcon from '@heroicons/react/outline/ShoppingCartIcon';
@@ -12,11 +12,12 @@ import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
 import {selectUser} from '../slices/sessionSlice';
 function Header() {
-    const items = useSelector(selectItems);
+    const items= useSelector(selectItems)
     const session = useSession()
     const router = useRouter();
+
     return (
-    <header class={'sticky'}>
+    <header className={'sticky'}>
         {/*Top Nav*/}
         <div className='flex items-center bg-amazon_blue p-1 flex-grow py-2'>
             {/*The amazon logo. py-2 means the padding top is 0.5 rem*/}

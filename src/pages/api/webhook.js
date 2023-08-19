@@ -15,6 +15,7 @@ const endPointSecret = process.env.STRIPE_SIGNING_SECRET;
 const fulfillOrder = async (session) => {
   console.log('Fulfilling order: ', session.id)
   const userDocPath = `users/${session.metadata.userEmail}/orders/${session.id}`; // Construct the path
+
   console.log('User Document Path: ', userDocPath);
   return app.firestore().collection('users').
   doc(session.metadata.userEmail).

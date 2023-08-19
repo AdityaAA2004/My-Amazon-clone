@@ -16,13 +16,7 @@ export const basketSlice = createSlice({
       const itemsToRemove = state.items.filter(basketItem => basketItem.id === action.payload.id);
       //Note if we use 'filter' method, all the items with add id will be removed.
 
-      // if(index >= 0){
-      //   newBasket.splice(index,1); //this essentially removes the item with the index found above.
 
-      // }
-      // else{
-      //   alert("Cant find the item to remove.");
-      // }
       let newBasket = [...state.items];
       itemsToRemove.forEach((itemRemove,indRemove)=>{
         newBasket.forEach((item,ind)=>{
@@ -33,6 +27,9 @@ export const basketSlice = createSlice({
       })
       console.log(itemsToRemove);
       state.items = newBasket;
+    },
+    resetBasket: (state) => {
+      state.items = []; // Reset the items to an empty array or initial state
     },
 
     reduceQuantity: (state,action) => {
@@ -47,7 +44,7 @@ export const basketSlice = createSlice({
   },
 });
 
-export const { addToBasket, removeFromBasket, reduceQuantity } = basketSlice.actions;
+export const { addToBasket, removeFromBasket, reduceQuantity,resetBasket } = basketSlice.actions;
 
 // Selectors - This is how we pull information from the Global store slice
 export const selectItems = (state) => state.items;
