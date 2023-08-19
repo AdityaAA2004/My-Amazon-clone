@@ -4,7 +4,7 @@ import * as admin from "firebase-admin"
 // Secure a connection to Firebase from the backend
 const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS
 const app = !admin.apps.length ? admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(JSON.parse(serviceAccount))
 }) : admin.app();
 
 // Make connection to Stripe
