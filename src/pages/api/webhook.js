@@ -2,9 +2,10 @@ import { buffer } from "micro"
 import * as admin from "firebase-admin"
 
 // Secure a connection to Firebase from the backend
-const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS
+const serviceAccount = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+console.log(serviceAccount)
 const app = !admin.apps.length ? admin.initializeApp({
-  credential: admin.credential.cert(JSON.parse(serviceAccount))
+  credential: admin.credential.cert(serviceAccount)
 }) : admin.app();
 
 // Make connection to Stripe
