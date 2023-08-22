@@ -3,7 +3,7 @@ import * as admin from "firebase-admin"
 
 // Secure a connection to Firebase from the backend
 const serviceAccount = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS)
-console.log(serviceAccount)
+console.log(typeof(serviceAccount))
 const app = !admin.apps.length ? admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 }) : admin.app();
@@ -13,10 +13,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const endPointSecret = process.env.STRIPE_SIGNING_SECRET;
 
 const fulfillOrder = async (session) => {
-  console.log('Fulfilling order: ', session.id)
   const userDocPath = `users/${session.metadata.userEmail}/orders/${session.id}`; // Construct the path
 
-  console.log('User Document Path: ', userDocPath);
   return app.firestore().collection('users').
   doc(session.metadata.userEmail).
   collection('orders').
@@ -54,7 +52,9 @@ export default async (req, res) => {
     if (event.type === 'checkout.session.completed') {
       console.log('Checkout session completed event received');
       const session = event.data.object;
-      console.log(session)
+      // console.log(session)
+      // console.log("Service Account data type",typeof(serviceAccount))
+      // console.log("Service account value type",process.env.GOOGLE_APPLICATION_CREDENTIALS);
       //fulfill the order
       try {
         await fulfillOrder(session);
