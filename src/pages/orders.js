@@ -5,7 +5,7 @@ import moment from "moment";
 import Order from "../components/Order";
 import {list} from "postcss";
 
-export default function orders({listOfOrders}){
+export default function orders({listOfOrders,session}){
 
     return (
         <div className={'h-screen'}>
@@ -61,7 +61,7 @@ export async function getServerSideProps(context){
         return {
             props: {
                 listOfOrders:ordersMapped,
-                session,
+                session:session,
             }
         }
 

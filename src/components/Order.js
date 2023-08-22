@@ -19,7 +19,7 @@ export default function Order({id,amount,amount_shipping,images,timestamp,items}
                         <Currency quantity={amount_shipping} currency={"usd"} />
                     </p>
                 </div>
-                <p className={'text-sm whitespace-nowrap self-end flex-1 text-right sm:text-xl text-blue-500'}>{basket.length} items</p>
+                <p className={'text-sm whitespace-nowrap self-end flex-1 text-right sm:text-xl text-blue-500'}>{items.length} items</p>
                 <p className={'absolute top-2 right-2 w-40 lg:w-72 truncate text-xs whitespace-nowrap'}>ORDER # {id}</p>
 
             </div>
