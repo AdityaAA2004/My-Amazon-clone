@@ -10,11 +10,14 @@ import {signIn, signOut, useSession} from "next-auth/react";
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
-import {selectUser} from '../slices/sessionSlice';
+
 function Header() {
-    const items= useSelector(selectItems)
+    const items = useSelector(selectItems);
+    console.log(items);
     const session = useSession()
     const router = useRouter();
+
+
 
     return (
     <header className={'sticky'}>

@@ -4,6 +4,8 @@ import StarIcon from '@heroicons/react/solid/StarIcon';
 import Currency from 'react-currency-formatter-v2';
 import { useDispatch } from 'react-redux';
 import { addToBasket } from '../slices/basketSlice';
+import { toggleDisplayToast } from '../slices/toastMessageSlice';
+
 const MAX_RATING = 5;
 const MIN_RATING = 1;
 
@@ -11,10 +13,14 @@ function Product({id,title,price,description,category,image}) {
     const [rating,setRating] = useState(
         Math.floor(Math.random() * (MAX_RATING - MIN_RATING +1)) + MIN_RATING
     );
+    
     const dispatch = useDispatch();
   
-   
-
+    const handleAddToBasket = () => {
+        addItemToBasket();
+        dispatch(toggleDisplayToast('Product added to basket')); // Pass a message
+      };
+      
     const [hasPrime] = useState(Math.random() < 0.5);
     //Note, we generally have the setRating mehtod as well. However, in our case we would create the setRating method ourselves.
     const addItemToBasket = () => {
@@ -24,8 +30,12 @@ function Product({id,title,price,description,category,image}) {
         console.log(product);
         dispatch(addToBasket(product));
     }
+ 
+
     return (
+        
     <div className='relative flex flex-col m-5 bg-white z-40 p-10'>
+        
         <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
         <Image src={image} height={200} width={200} objectFit='contain'/>
         <h4 className='my-3'>{title}</h4>
@@ -49,7 +59,8 @@ function Product({id,title,price,description,category,image}) {
                 <p className='text-xs text-gray-500'>FREE Next Day Delivery</p>
             </div>
         )}
-        <button className='mt-auto button' onClick={addItemToBasket}>Add to Basket</button>
+        <button className='mt-auto button' onClick={handleAddToBasket}>Add to Basket</button>
+            
     </div>
   )
 }

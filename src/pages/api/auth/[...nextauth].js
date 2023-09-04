@@ -1,7 +1,5 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import { useDispatch } from "react-redux";
-import { setUser, clearUser } from "../../../slices/sessionSlice";
 
 const options = {
   providers: [
