@@ -32,7 +32,7 @@ export async function getServerSideProps(context){
     const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
     //Get user logged in credentials
     const session = await getSession(context) // the context contains the request, response and all other stuff.
-    if (!session){
+    if (!session.user){
         return {
             props: {}
         }
@@ -41,7 +41,7 @@ export async function getServerSideProps(context){
     else{
         //Load the database to get all the orders.
         const stripeOrders = await db.collection('users').
-        doc(((await session).user.email)).
+        doc((await session).user.email).
         collection('orders').
         orderBy('timestamp','desc').
         get()
@@ -57,7 +57,7 @@ export async function getServerSideProps(context){
                 })
             ).data
         })))
-        console.log(ordersMapped)
+        
         return {
             props: {
                 listOfOrders:ordersMapped,

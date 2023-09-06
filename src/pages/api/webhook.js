@@ -2,9 +2,8 @@ import { buffer } from "micro"
 import * as admin from "firebase-admin"
 
 // Secure a connection to Firebase from the backend
-const decoded_keys = new Buffer(process.env.GOOGLE_APPLICATION_CREDENTIALS, 'base64').toString('ascii');
-const serviceAccount = JSON.parse(decoded_keys)
-console.log(typeof(serviceAccount))
+const serviceAccount = require("../../../service-account-key.json");
+
 const app = !admin.apps.length ? admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 }) : admin.app();
