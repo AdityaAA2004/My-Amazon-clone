@@ -1,9 +1,8 @@
 import Header from "../components/Header";
-import {getSession, useSession} from "next-auth/react";
+import {getSession} from "next-auth/react";
 import {db} from "../../firebase";
 import moment from "moment";
 import Order from "../components/Order";
-import {list} from "postcss";
 
 export default function orders({listOfOrders,session}){
 
