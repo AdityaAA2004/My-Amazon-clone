@@ -1,6 +1,5 @@
 import Header from "../components/Header";
 import {getSession} from "next-auth/react";
-import {db} from "../../firebase";
 import moment from "moment";
 import Order from "../components/Order";
 
@@ -39,8 +38,17 @@ export async function getServerSideProps(context){
 
     else{
         //Load the database to get all the orders.
-        const stripeOrders = await db.collection('users').
-        doc((await session).user.email).
+        const admin= require("firebase-admin");
+        
+        const serviceAccount= {
+            client_email: process.env.FIREBASE_CLIENT_EMAIL,
+            private_key: process.env.FIREBASE_PRIVATE_KEY,
+            project_id: "clone-2-99846",
+            private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID
+        }
+        
+        const stripeOrders = await admin.app().firestore().collection('users').
+        doc(session.user.email).
         collection('orders').
         orderBy('timestamp','desc').
         get()
