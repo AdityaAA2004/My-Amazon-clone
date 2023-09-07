@@ -6,7 +6,11 @@ import * as admin from "firebase-admin"
 const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
 
 const app = !admin.apps.length ? admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert({
+    client_email: process.env.FIREBASE_CLIENT_EMAIL,
+    private_key: process.env.FIREBASE_PRIVATE_KEY,
+    project_id: "clone-2-99846"
+  })
 }) : admin.app();
 
 // Make connection to Stripe
