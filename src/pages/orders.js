@@ -40,14 +40,16 @@ export async function getServerSideProps(context){
         //Load the database to get all the orders.
         const admin= require("firebase-admin");
         
-        const serviceAccount= {
-            client_email: process.env.FIREBASE_CLIENT_EMAIL,
-            private_key: process.env.FIREBASE_PRIVATE_KEY,
-            project_id: "clone-2-99846",
-            private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID
-        }
-        
-        const stripeOrders = await admin.app().firestore().collection('users').
+        const privateKey= JSON.parse(process.env.FIREBASE_PRIVATE_KEY);
+const app = !admin.apps.length ? admin.initializeApp({
+  credential: admin.credential.cert({
+    client_email: process.env.FIREBASE_CLIENT_EMAIL,
+    private_key: privateKey,
+    project_id: "clone-2-99846"
+  })
+}) : admin.app();
+
+        const stripeOrders = await app.firestore().collection('users').
         doc(session.user.email).
         collection('orders').
         orderBy('timestamp','desc').
