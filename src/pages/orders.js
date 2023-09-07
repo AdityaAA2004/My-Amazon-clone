@@ -10,7 +10,7 @@ export default function orders({listOfOrders,session}){
             <header>
                 <Header />
             </header>
-            <main className={"max-w-screen-2xl mx-auto my-10"}>
+            <main className={"max-w-screen-2xl mx-12 my-10"}>
                 <p className={'text-3xl border-b mb-2 pb-1 border-yellow-400'}>Your Orders</p>
                 {session ? (
                     <h2>{listOfOrders.length} Orders</h2>
