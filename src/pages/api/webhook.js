@@ -3,12 +3,11 @@ import * as admin from "firebase-admin"
 
 // Secure a connection to Firebase from the backend
 
-const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
-
+const privateKey= JSON.parse(process.env.FIREBASE_PRIVATE_KEY);
 const app = !admin.apps.length ? admin.initializeApp({
   credential: admin.credential.cert({
     client_email: process.env.FIREBASE_CLIENT_EMAIL,
-    private_key: process.env.FIREBASE_PRIVATE_KEY,
+    private_key: privateKey,
     project_id: "clone-2-99846"
   })
 }) : admin.app();
