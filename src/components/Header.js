@@ -10,6 +10,8 @@ import {signIn, signOut, useSession} from "next-auth/react";
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { selectItems } from '../slices/basketSlice';
+import { ToastContainer, toast } from "react-toastify";
+
 
 function Header() {
     const items = useSelector(selectItems);
@@ -17,11 +19,22 @@ function Header() {
     const session = useSession()
     const router = useRouter();
 
+    const showError = () =>{
+        console.log('Displayed failure message');
+        toast.error("Login to view orders.", {
+          position: toast.POSITION.TOP_CENTER,
+          toastId:'failure',
+        });
+    
+    }
+    
+
 
 
     return (
     <header className={'sticky'}>
         {/*Top Nav*/}
+        <ToastContainer autoClose={650}/>
         <div className='flex items-center bg-amazon_blue p-1 flex-grow py-2'>
             {/*The amazon logo. py-2 means the padding top is 0.5 rem*/}
             <div className='mt-2 flex items-center sm:flex-grow-0'>
@@ -52,7 +65,7 @@ function Header() {
                     <p>{session.data ? `Hello ${session.data.user.name}`: "Sign In"}</p>
                     <p className='font-extrabold md:text-sm' >Account and Lists</p>
                 </div>
-                <div className='link' onClick={() => router.push("/orders")}>
+                <div className='link' onClick={() => session.data?.user ? router.push("/orders") : showError()}>
                     <p>Returns</p>
                     <p className='font-extrabold md:text-sm'>& Orders</p>
                 </div>
